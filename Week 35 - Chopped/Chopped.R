@@ -98,7 +98,7 @@ before+after+plot_annotation(
   subtitle="Replace fuzzy duplicates from the judge names using the stringdist package."
 )&
   theme(plot.background = element_rect(fill = "moccasin"),
-        panel.background = element_rect(fill="moccasin"),
+        panel.background = element_rect(fill="ghostwhite"),
         axis.title = element_text(family = "sans" ,size=14,colour=textcol),
         axis.text = element_text(family = "sans" ,size=14,colour=textcol),
         plot.title = element_text(family = "sans", face = "bold", size = 20, colour = textcol),
