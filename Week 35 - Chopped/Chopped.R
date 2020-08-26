@@ -18,39 +18,43 @@ judge_df <- chopped %>% select(season:judge3) %>%
   
 #How often did each judge appear?
 rank_before <- judge_df %>% 
-  group_by(txt=judge) %>% 
-  dplyr::count(sort=T) %>% 
+  dplyr::count(judge,sort=T) %>% 
   tibble() %>% 
-  mutate(txt=ifelse(is.na(txt),"None",txt))
+  mutate(judge=ifelse(is.na(judge),"None",judge))
 
+names <- rank_before$judge
 
 #The core of fuzzy duplicates - Comparing each judge name with all the judge names before
 #We store the closest name and the distance between both
-out <- sapply(seq_along(test$txt)[-1],function(i) {
-  dist2 <- stringdist(test$txt[i],test$txt[1:i-1],method='jw',p=0.1)
+out <- sapply(seq_along(names)[-1],function(i) {
+  dist2 <- stringdist(names[i],names[1:i-1],method='jw',p=0.1)
   best_fit <- which.min(dist2)
   similarity2 <- min(dist2)
   return(c(similarity2,best_fit))
-})
+}) %>% 
+  t() %>%
+  as.data.frame() %>% 
+  add_row(V1=1,V2=1,.before = 1) %>% 
+  cbind(rank_before) %>% 
+  dplyr::rename(distance=V1,best_fit=V2) %>% 
+  mutate(replacement=judge[best_fit])
+  
 
 #Convert into a dataframe and find a decision rule for replacement
-out <- as.data.frame(t(out)) %>% 
-  add_row(V1=1,V2=1,.before = 1) %>% 
-  cbind(test) %>% 
-  dplyr::rename(distance=V1,best_fit=V2) %>% 
-  mutate(replacement=ifelse(distance<0.06,txt[best_fit],txt)) %>% 
-  filter(replacement!=txt)
+#Just keep the ones that change
+out <- out %>% 
+  mutate(replacement=ifelse(distance<0.06,replacement,judge)) %>% 
+  filter(replacement!=judge)
 
 #Replace judge names
 judge_df2 <- judge_df %>%
-  mutate(judge=plyr::mapvalues(judge,from=out$txt,to=out$replacement))
+  mutate(judge=plyr::mapvalues(judge,from=out$judge,to=out$replacement))
 
 #How often did each judge REALLY appear?
 rank_after <- judge_df2 %>% 
-  group_by(txt=judge) %>% 
-  dplyr::count(sort=T) %>% 
+  dplyr::count(judge,sort=T) %>% 
   tibble() %>% 
-  mutate(txt=ifelse(is.na(txt),"None",txt))
+  mutate(judge=ifelse(is.na(judge),"None",judge))
 
 
 ##Visualization
