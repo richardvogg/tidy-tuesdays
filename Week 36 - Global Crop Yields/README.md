@@ -2,4 +2,4 @@ This week, #TidyTuesday was about analyzing data from [Our World in Data](https:
 
 I played around with [this](https://github.com/rensa/ggflags) adaptation of the [ggflags](https://github.com/ellisp/ggflags) package.
 
-![](Fertilizers.png)
+![](Fertilizer.png)
