@@ -1,6 +1,5 @@
-I wanted to analyze the judges of the Show Chopped when I noticed that there were a lot of typos in their names.
+This week, #TidyTuesday was about analyzing data from [Our World in Data](https://ourworldindata.org/) around Crop yields.
 
-For example Amanda Freitag appeared sometimes as Amanda Freita or Amanda Frietag.
-With the help of the stringdist package, I was able to replace those fuzzy duplicates with the real name (the most frequent one).
+I played around with [this](https://github.com/rensa/ggflags) adaptation of the [ggflags](https://github.com/ellisp/ggflags) package.
 
-![](Chopped.png)
+![](Fertilizers.png)
