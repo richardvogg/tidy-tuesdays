@@ -21,17 +21,19 @@ land_use <- tuesdata$land_use_vs_yield_change_in_cereal_production %>%
   group_by(Entity,Code) %>% 
   summarise(population=last(`Total population (Gapminder)`)) %>% 
   ungroup() %>% 
-  filter(population>15000000)
+  filter(population>10000000)
 
 #Calculate the before and after, using the average of two years to be slightly
 #more robust against outliers
 final <- fertilizer %>% group_by(Entity,Code) %>% 
-  summarise(fertilizer=sum(fertilizer,na.rm=T),
+  summarise(fertilizer_n=sum(!is.na(fertilizer)),
+    fertilizer=sum(fertilizer,na.rm=T),
             before=max((crop_yield[Year==2001]+crop_yield[Year==2000])/2),
-            after=max((crop_yield[Year==2008]+crop_yield[Year==2009])/2)) %>% 
+            after=max((crop_yield[Year==2016]+crop_yield[Year==2017])/2)) %>% 
   mutate(perc_change_crop_yield=(after/before)-1) %>% 
   ungroup() %>% 
-  filter(!is.nan(perc_change_crop_yield),!is.na(perc_change_crop_yield)) %>% 
+  filter(!is.nan(perc_change_crop_yield),!is.na(perc_change_crop_yield),
+         fertilizer_n==16) %>% 
   inner_join(land_use,by=c("Code","Entity")) 
 
 
@@ -61,7 +63,7 @@ ggplot(aes(x=fertilizer,y=after))+
   #geom_text_repel(aes(label=Entity))+
   labs(x="Nitrogen fertilizer use (kg per hectare)",y="Crop yield (tonnes per hectare)",
        title="Fertilizers and their effect on crop yield",
-       subtitle="How do crop yields change between 2002 and 2009 depending on the amount of fertilizers used?",
+       subtitle="How do crop yields change between 2002 and 2017 depending on the amount of fertilizers used?",
        caption="Data from Our World In Data")+
   theme(plot.background = element_rect(fill = "ivory"),
         panel.background = element_rect(fill="ivory2"),
