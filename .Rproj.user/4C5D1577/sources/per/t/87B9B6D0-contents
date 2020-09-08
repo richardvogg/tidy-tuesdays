@@ -122,3 +122,22 @@ audition + wow +
         plot.title = element_text(family = "Roboto", face = "bold", size = 16, colour = textcol))
 
 dev.off()
+
+
+
+#Other
+
+
+#Check tf-idf
+word_df %>%
+  filter(n>14) %>%
+  bind_tf_idf(word,speaker,n) %>% 
+  group_by(speaker) %>% 
+  top_n(15) %>% 
+  ungroup() %>%
+  ggplot(aes(word, tf_idf, fill = speaker)) +
+  geom_col(show.legend = FALSE) +
+  labs(x = NULL, y = "tf-idf") +
+  facet_wrap(~speaker, ncol = 2, scales = "free") +
+  coord_flip()
+

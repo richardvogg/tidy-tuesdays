@@ -3,7 +3,7 @@
     "path": "~/GitHub/tidy-tuesdays/Week 37 - Friends/friends.R",
     "project_path": "Week 37 - Friends/friends.R",
     "type": "r_source",
-    "hash": "2440182378",
+    "hash": "2106308739",
     "contents": "",
     "dirty": false,
     "created": 1599506405743.0,
@@ -11,15 +11,15 @@
     "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "9,25",
-        "scrollLine": "0"
+        "cursorPosition": "142,0",
+        "scrollLine": "122"
     },
     "folds": "",
-    "lastKnownWriteTime": 1599571301,
+    "lastKnownWriteTime": 1599586398,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1599571301662,
+    "last_content_update": 1599586398028,
     "read_only": false,
     "read_only_alternatives": []
 }
