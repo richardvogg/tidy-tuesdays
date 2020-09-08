@@ -1,1 +1,1 @@
-![](Extinct plants.png)
+![](Extinct Plants.png)
