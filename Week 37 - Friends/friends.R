@@ -141,3 +141,21 @@ word_df %>%
   facet_wrap(~speaker, ncol = 2, scales = "free") +
   coord_flip()
 
+
+#Check log-odds
+
+library(tidylo)
+
+word_df %>%
+  filter(n>14) %>%
+  bind_log_odds(speaker,word,n) %>%
+  group_by(speaker) %>%
+  top_n(10,log_odds_weighted) %>%
+  ungroup() %>%
+  mutate(word=reorder_within(word,log_odds_weighted,speaker)) %>%
+  ggplot(aes(x=word, log_odds_weighted, fill = speaker)) +
+  geom_col(show.legend = FALSE) +
+  labs(x = NULL, y = "tf-idf") +
+  facet_wrap(~speaker, ncol = 2, scales = "free_y") +
+  coord_flip()+
+  scale_x_reordered()
