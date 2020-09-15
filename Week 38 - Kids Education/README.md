@@ -1,4 +1,4 @@
-![](kids_education.png)
+![](education_table.png)
 
 ### What I learned:
 * use rowwise()
