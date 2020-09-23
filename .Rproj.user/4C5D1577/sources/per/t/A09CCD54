@@ -1,0 +1,32 @@
+{
+    "id": "A09CCD54",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1600729500679.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "expression": "expeditions",
+        "caption": "expeditions",
+        "totalObservations": "10364",
+        "displayedObservations": "10364",
+        "variables": "16",
+        "cacheKey": "2F9BF957",
+        "object": "expeditions",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=expeditions&cache_key=2F9BF957&max_cols=50",
+        "preview": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 141300438308749312,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1600729500679,
+    "read_only": false,
+    "read_only_alternatives": []
+}

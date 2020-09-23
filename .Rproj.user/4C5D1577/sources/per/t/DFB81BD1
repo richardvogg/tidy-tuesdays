@@ -1,0 +1,32 @@
+{
+    "id": "DFB81BD1",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1600808255257.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "expression": "members",
+        "caption": "members",
+        "totalObservations": 76519,
+        "displayedObservations": 76519,
+        "variables": 21,
+        "cacheKey": "97B07BD8",
+        "object": "members",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=members&cache_key=97B07BD8&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 2019029019398530407,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1600808255257,
+    "read_only": false,
+    "read_only_alternatives": []
+}

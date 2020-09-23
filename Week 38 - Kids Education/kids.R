@@ -10,8 +10,8 @@ kids <- tuesdata$kids
 
 top10 <- kids %>% group_by(state) %>%
   filter(year==2016) %>%
-  summarise(total=round(sum(inf_adj_perchild),1)) %>%
-  top_n(10,total)
+  summarise(total=round(sum(inf_adj_perchild),1)) #%>%
+  #top_n(10,total)
 
 
 #Prepare the data with sparklines

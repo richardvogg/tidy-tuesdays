@@ -1,0 +1,32 @@
+{
+    "id": "32CFEB56",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1600729415730.0,
+    "source_on_save": false,
+    "relative_order": 8,
+    "properties": {
+        "expression": "peaks",
+        "caption": "peaks",
+        "totalObservations": "468",
+        "displayedObservations": "468",
+        "variables": "8",
+        "cacheKey": "0FBD9C0B",
+        "object": "peaks",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=peaks&cache_key=0FBD9C0B&max_cols=50",
+        "preview": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 2459000718892870711,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1600729415730,
+    "read_only": false,
+    "read_only_alternatives": []
+}
