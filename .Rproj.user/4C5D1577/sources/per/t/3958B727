@@ -3,7 +3,7 @@
     "path": "~/GitHub/tidy-tuesdays/Week 39 - Himalayan expeditions/everest.R",
     "project_path": "Week 39 - Himalayan expeditions/everest.R",
     "type": "r_source",
-    "hash": "722491763",
+    "hash": "2890691704",
     "contents": "",
     "dirty": false,
     "created": 1600729358759.0,
@@ -11,15 +11,15 @@
     "relative_order": 7,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "78,20",
-        "scrollLine": "71"
+        "cursorPosition": "58,0",
+        "scrollLine": "44"
     },
     "folds": "",
-    "lastKnownWriteTime": 1600896057,
+    "lastKnownWriteTime": 1600905397,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1600896057368,
+    "last_content_update": 1600905397147,
     "read_only": false,
     "read_only_alternatives": []
 }
