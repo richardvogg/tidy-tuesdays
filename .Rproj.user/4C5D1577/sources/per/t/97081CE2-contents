@@ -1,0 +1,32 @@
+library(sf)
+library(tidyverse)
+library(fuzzyjoin)
+library(leaflet)
+
+
+tuesdata <- tidytuesdayR::tt_load(2020, week = 39)
+peaks <- tuesdata$peaks
+
+#Downloaded from Wikipedia: https://en.wikipedia.org/wiki/List_of_Himalayan_peaks_and_passes
+
+summits <- read_sf("C:/Richard/R and Python/TidyTuesday/Week 39 - Himalaya/doc.kml") %>%
+  extract(geometry, c('lat', 'lon','nothing'), '\\((.*), (.*),(.*)\\)') %>%
+  select(name=Name,lat,lon) %>%
+  separate(name,into=c("name","height"),sep="[(]") %>%
+  mutate(name=str_remove(name,"^[:digit:]*[.] "),
+         name=str_remove(name,"Mount "),
+         height=parse_number(height),
+         name=trimws(name),
+         across(c(lon,lat),as.numeric)) %>%
+  separate(name,into="name",sep="/")
+
+#Everest is 8848 in one dataset and Mount Everest 8850 in the other.
+
+map <- summits %>%
+  stringdist_left_join(peaks,by=c("name"="peak_name"),method="jw",max_dist=0.1) %>% View()
+  filter(abs(height-height_metres)<10) %>% View()
+  ggplot(aes(x=lon,y=lat,col=is.na(peak_id),text=name))+geom_point()
+
+library(plotly)
+
+ggplotly(map,tooltip="text")

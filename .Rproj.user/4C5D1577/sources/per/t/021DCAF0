@@ -1,0 +1,32 @@
+{
+    "id": "021DCAF0",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1602620545650.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "expression": "tidy_mews",
+        "caption": "tidy_mews",
+        "totalObservations": 120000,
+        "displayedObservations": 120000,
+        "variables": 3,
+        "cacheKey": "363F717B",
+        "object": "tidy_mews",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=tidy_mews&cache_key=363F717B&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1602616308,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1602620545650,
+    "read_only": false,
+    "read_only_alternatives": []
+}
