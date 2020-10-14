@@ -3,22 +3,22 @@
     "path": "~/GitHub/tidy-tuesdays/Week 42 - datasauRus/datasaurus.R",
     "project_path": "Week 42 - datasauRus/datasaurus.R",
     "type": "r_source",
-    "hash": "2798969842",
+    "hash": "140732460",
     "contents": "",
     "dirty": false,
     "created": 1602549979263.0,
     "source_on_save": false,
     "relative_order": 5,
     "properties": {
-        "cursorPosition": "67,10",
-        "scrollLine": "53"
+        "cursorPosition": "100,19",
+        "scrollLine": "86"
     },
     "folds": "",
-    "lastKnownWriteTime": 1602694603,
+    "lastKnownWriteTime": 1602713368,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1602694603586,
+    "last_content_update": 1602713369004,
     "read_only": false,
     "read_only_alternatives": []
 }

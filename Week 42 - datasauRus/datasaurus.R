@@ -45,42 +45,50 @@ mews <- mews_borders %>%
   select(x,y)
 
 # This is an awesome feature, but my drawings always looked terrible
-final_mews <- draw_data(mews) %>% select(x,y)
-final_mews <- final_mews %>% mutate(x=100*(x-min(x))/(max(x)-min(x)),y=100*(y-min(y))/(max(y)-min(y)))
+final_mews <- draw_data(mews) %>% select(x,y) %>%
+  mutate(x=100*(x-min(x))/(max(x)-min(x)),
+         y=100*(y-min(y))/(max(y)-min(y)))
 
 
 final_mews %>% ggplot(aes(x,y))+geom_point()
 
+#Check mean and sd and compare with dino
+final_mews %>%
+  summarise(mean(x),sd(x),mean(y),sd(y),cor(x,y))
+
+dino %>%
+  summarise(mean(x),sd(x),mean(y),sd(y),cor(x,y))
+
+#Adapt means and standard deviation to be almost equal to dino
+final_mews_adapt <- final_mews %>%
+  mutate(x=x+9,y=y-12,
+         x=20+x*0.6)
+
+final_mews_adapt %>%
+  summarise(mean(x),sd(x),mean(y),sd(y),cor(x,y))
+
 dino %>% ggplot(aes(x,y))+geom_point()
+
+final_mews_adapt %>% ggplot(aes(x,y))+geom_point()
 
 #This function uses simulated annealing to move points from the dino constellation
 #towards mews, preserving mean, sd and cor.
 #Higher N (>500000) yield better results in this case but run a long time.
 metamers <- metamerize(data=dino,
            preserve = delayed_with(mean(x), sd(x), mean(y), sd(y), cor(x, y)),
-           minimize = c(mean_dist_to(final_mews),mean_self_proximity),
-           N=10000,
-           trim=100)
+           minimize = c(mean_dist_to(final_mews_adapt),mean_self_proximity),
+           N=250000,
+           trim=1000)
 
 metamers[[length(metamers)]] %>%
   ggplot(aes(x,y))+geom_point()
 
-mean(metamers[[length(metamers)]]$x)
-mean(dino$x)
 
-mean(metamers[[length(metamers)]]$y)
-mean(dino$y)
-
-sd(metamers[[length(metamers)]]$x)
-sd(dino$x)
-
-sd(metamers[[length(metamers)]]$y)
-sd(dino$y)
-
-cor(metamers[[length(metamers)]]$x,metamers[[length(metamers)]]$y)
-cor(dino$x,dino$y)
-
-
+metamers[[length(metamers)]] %>%
+  summarise(mean(x),sd(x),mean(y),sd(y),cor(x,y))
+  
+dino %>%
+  summarise(mean(x),sd(x),mean(y),sd(y),cor(x,y))
 
 
 
