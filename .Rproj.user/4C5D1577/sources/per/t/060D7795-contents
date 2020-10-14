@@ -6,31 +6,22 @@ tuesdata <- tidytuesdayR::tt_load(2020, week = 42)
 
 datasaurus <- tuesdata$datasaurus
 
-
-datasaurus %>%
-  filter(dataset=="dino") %>%
-ggplot(aes(x=x,y=y))+geom_point()
-
-
-
 mews <- image_read("Week 42 - datasauRus/Mews2.jpg")
 
 #convolution filters to detect edges
 edge <- matrix(c(0,1,0, 1,-4,1, 0,1,0), 3, 3)
-sharpen  = matrix(c(0,-1,0, -1,8,-1, 0,-1,0),3, 3)
+sharpen <- matrix(c(0,-1,0, -1,4,-1, 0,-1,0),3, 3)
 
 #Image processing
 mews_borders <- mews %>% 
   image_quantize(colorspace="gray") %>%
   image_convolve(edge) %>% 
-  image_convolve(sharpen) %>% 
-  image_threshold("35%",type="white") %>% 
+  image_convolve(sharpen) %>%
+  image_threshold("20%",type="white") %>% 
   image_threshold("100%",type="black") %>% 
-  image_median(2) %>%
-  image_median(2) %>%
+  image_median(2) %>% 
   #crop to the head of the cat
   image_crop("140x140+60+25") %>% 
-  image_scale("100x100!") %>% 
   #transform into tidy dataframe
   image_data() %>%
   as.integer() %>%
@@ -55,31 +46,38 @@ mews <- mews_borders %>%
 
 # This is an awesome feature, but my drawings always looked terrible
 final_mews <- draw_data(mews) %>% select(x,y)
+final_mews <- final_mews %>% mutate(x=100*(x-min(x))/(max(x)-min(x)),y=100*(y-min(y))/(max(y)-min(y)))
 
+
+final_mews %>% ggplot(aes(x,y))+geom_point()
+
+dino %>% ggplot(aes(x,y))+geom_point()
 
 #This function uses simulated annealing to move points from the dino constellation
 #towards mews, preserving mean, sd and cor.
-metamer <- metamerize(data=dino,
+#Higher N (>500000) yield better results in this case but run a long time.
+metamers <- metamerize(data=dino,
            preserve = delayed_with(mean(x), sd(x), mean(y), sd(y), cor(x, y)),
-           minimize = mean_dist_to(mews),
-           N=100000,trim=10000)
+           minimize = c(mean_dist_to(final_mews),mean_self_proximity),
+           N=10000,
+           trim=100)
 
-metamer[[10000]] %>%
+metamers[[length(metamers)]] %>%
   ggplot(aes(x,y))+geom_point()
 
-mean(metamer[[10000]]$x)
+mean(metamers[[length(metamers)]]$x)
 mean(dino$x)
 
-mean(metamer[[10000]]$y)
+mean(metamers[[length(metamers)]]$y)
 mean(dino$y)
 
-sd(metamer[[10000]]$x)
+sd(metamers[[length(metamers)]]$x)
 sd(dino$x)
 
-sd(metamer[[10000]]$y)
+sd(metamers[[length(metamers)]]$y)
 sd(dino$y)
 
-cor(metamer[[10000]]$x,metamer[[10000]]$y)
+cor(metamers[[length(metamers)]]$x,metamers[[length(metamers)]]$y)
 cor(dino$x,dino$y)
 
 
