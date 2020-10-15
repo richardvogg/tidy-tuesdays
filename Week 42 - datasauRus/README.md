@@ -18,6 +18,6 @@ I used this as an input:
 
 ![](input2.png)
 
-After applying metamerize, this is the output:
+After applying metamerize, this is the output with the desired properties. Not super super cool, but at least recognizable.
 
 ![](output2.png)
