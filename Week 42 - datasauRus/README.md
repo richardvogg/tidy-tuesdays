@@ -6,8 +6,14 @@
 
 ![](Mews2.JPG)
 
+This is the version after image processing.
 ![](mews_plot.png)
 
+Now I would like to have this plot to have the same mean(x), mean(y), sd(x), sd(y) and cor(x,y) as this dino.
 ![](dino.png)
 
-![](output.png)
+I used this as an input.
+![](input2.png)
+
+After applying metamerize, this is the output.
+![](output2.png)
