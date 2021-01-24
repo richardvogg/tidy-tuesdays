@@ -1,0 +1,32 @@
+{
+    "id": "326235C7",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1611485747225.0,
+    "source_on_save": false,
+    "relative_order": 9,
+    "properties": {
+        "expression": "households",
+        "caption": "households",
+        "totalObservations": 48,
+        "displayedObservations": 48,
+        "variables": 4,
+        "cacheKey": "22B37CF3",
+        "object": "households",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=households&cache_key=22B37CF3&max_cols=50",
+        "preview": 0
+    },
+    "folds": "",
+    "lastKnownWriteTime": 3548067076488918113,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1611485747225,
+    "read_only": false,
+    "read_only_alternatives": []
+}
