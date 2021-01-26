@@ -1,0 +1,32 @@
+{
+    "id": "D6ED0F79",
+    "path": null,
+    "project_path": null,
+    "type": "r_dataframe",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1611663090620.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "expression": "company_rank",
+        "caption": "company_rank",
+        "totalObservations": "10392",
+        "displayedObservations": "10392",
+        "variables": "6",
+        "cacheKey": "5FF154A9",
+        "object": "company_rank",
+        "environment": "",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=company_rank&cache_key=5FF154A9&max_cols=50",
+        "preview": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1611662765,
+    "encoding": "",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1611663090620,
+    "read_only": false,
+    "read_only_alternatives": []
+}
