@@ -3,7 +3,7 @@
     "path": "~/GitHub/tidy-tuesdays/2021/Week 7 - Income/income.R",
     "project_path": "2021/Week 7 - Income/income.R",
     "type": "r_source",
-    "hash": "2657718013",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1612801958180.0,
@@ -11,15 +11,15 @@
     "relative_order": 5,
     "properties": {
         "tempName": "Untitled1",
-        "cursorPosition": "83,75",
-        "scrollLine": "69"
+        "cursorPosition": "7,0",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1612864644,
+    "lastKnownWriteTime": 1612866999,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1612864644847,
+    "last_content_update": 1612866999743,
     "read_only": false,
     "read_only_alternatives": []
 }

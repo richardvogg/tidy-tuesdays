@@ -89,3 +89,6 @@ df %>%
         axis.title = element_text(family="Fresca",size=12),
         axis.text = element_text(family="Fresca",size=14)) 
   
+income_time
+income_limits
+income_aggregate %>% filter(race=="All Races") %>% View()
