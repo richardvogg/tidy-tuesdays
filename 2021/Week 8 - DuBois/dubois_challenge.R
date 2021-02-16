@@ -11,19 +11,10 @@ showtext::showtext_auto()
 
 df <- tuesdata$city_rural
 
-ggplot() +
-  geom_rect(aes(xmin=0,xmax=78.139,ymin=0,ymax=10))+
-  geom_polygon(aes(x=c(78.139,78.039,70.000,70.100),y=c(0,0,-100,-100),group=1))
-
-ggplot() +
-  geom_rect(aes(xmin=0,xmax=10,ymin=0,ymax=1))+
-  coord_polar()
-
-
 
 t <- seq(6.5, 35.4, by=0.1)
 x <-  t * cos(-t)
-y <-  t*sin(-t)
+y <-  t * sin(-t)
 
 
 
