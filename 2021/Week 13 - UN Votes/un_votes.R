@@ -25,11 +25,6 @@ world <- ne_countries(scale = "small", returnclass = 'sf') %>%
     )
   )
 
-europe <- ne_countries(scale="small",returnclass="sf") %>%
-  filter(continent=="Europe",name!="Russia") %>%
-  st_crop(xmin = -24, xmax = 40, ymin = 33, ymax = 73)
-  
-
 
 votes <- roll_calls %>%
   filter(date>as.Date("2010-01-01"))
@@ -51,7 +46,7 @@ world %>%
   #                labels=c("less than 25%","","more than 75%"))+
   facet_wrap(~issue)+
   labs(title="Who votes YES for resolutions and amendments?",
-       subtitle="Percentage of YES votes per country in the UN General Assembly \nbetween 1946 and 2019.",
+       subtitle="Percentage of YES votes per country in the UN General Assembly \nbetween 2010 and 2019.",
        fill = "% of YES votes",
        caption = "Data: Harvard Dataverse")+
   theme_light()+
