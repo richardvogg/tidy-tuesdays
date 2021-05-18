@@ -48,8 +48,12 @@ b <- survey %>% count(country_dedupes, sort = TRUE) %>%
   theme_linedraw() +
   theme(legend.position = "none")
 
-a + b + plot_annotation(title = "Fuzzy deduplication") &
+a + b + 
+  plot_annotation(title = "Fuzzy deduplication",
+                  caption = "Data: 2021 Ask a Manager salary survey") &
   theme(text = element_text(family = "Balsamiq"),
         plot.title = element_text(size = 25),
         plot.subtitle = element_text(size = 18),
         axis.text = element_text(size = 13))
+
+
