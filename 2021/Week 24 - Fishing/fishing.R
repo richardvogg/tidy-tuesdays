@@ -1,8 +1,6 @@
 library(ggplot2)
 library(dplyr)
-library(stringr)
 library(sf)
-library(emoGG) #devtools::install_github("dill/emoGG")
 library(patchwork)
 
 #fonts
@@ -96,3 +94,4 @@ lake_plot +
   inset_element(lake_top5[[6]], 0.25, 0.01, 0.5, 0.24) + #Saint Clair
   plot_annotation(caption = "Data: Great Lakes Fishery Commission") &
   theme(text = element_text(family = "Jura"))
+
