@@ -1,6 +1,7 @@
 library(ggplot2)
 library(dplyr)
 library(ggtext)
+library(ggforce)
 
 tuesdata <- tidytuesdayR::tt_load(2021, week = 31)
 
@@ -100,3 +101,25 @@ olympics %>%
   ggplot(aes(x = avg_weight, y = avg_height)) +
   geom_point(size = 0.2) +
   geom_text(aes(label = paste0(year, sport, sex)))
+
+## most extreme combinations of height and weight
+
+events <- olympics %>%
+  filter(season == "Summer", sex == "M", year == "2016", 
+         !is.na(weight), !is.na(height)) %>%
+  add_count(event) %>%
+  filter(n > 20) %>%
+  group_by(event) %>%
+  summarise(med_height = median(height),
+            med_weight = median(weight)) %>%
+  mutate(BMI = med_weight/ (med_height^2)) %>% 
+  slice(which.min(med_height), which.max(med_height), 
+        which.min(BMI), which.max(BMI)) %>%
+  .$event
+
+olympics %>%
+  filter(season == "Summer", sex == "M", year == "2016", !is.na(weight),
+         !is.na(height)) %>%
+  filter(event %in% events) %>%
+  ggplot(aes(x = height, y = weight, col = event)) + 
+  geom_point()
