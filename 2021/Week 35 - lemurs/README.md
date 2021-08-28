@@ -1,1 +1,5 @@
-![](plot.png)
+![](plotDMAD.png)
+
+![](plotEMAC.png)
+
+![](plotGMOH.png)
