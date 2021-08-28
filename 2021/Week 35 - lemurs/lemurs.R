@@ -2,6 +2,7 @@ library(ggplot2)
 library(dplyr)
 library(ggraph)
 library(igraph)
+library(graphlayouts)
 library(stringr)
 library(ggrepel)
 
@@ -39,9 +40,7 @@ lemurs %>% filter(dlc_id %in% ids) %>%
 set.seed(1)
 OGG_tree <- lemurs %>%
   distinct(taxon, dlc_id, lemur_name = name, dam_id, dam_dob, sire_id, sire_dob,
-           sex, dob) %>% 
-  mutate(dam_id = ifelse(str_detect(dam_id, "[:alpha:]"), NA, dam_id),
-         sire_id = ifelse(str_detect(sire_id, "[:alpha:]"), NA, sire_id)) %>%
+           sex, dob) %>%
   filter(taxon == "OGG")
 
 
@@ -129,3 +128,26 @@ ggplot(lemurs_final, aes(y = dob, x = jitter)) +
         plot.title = element_text(size = 25),
         plot.caption = element_text(size = 12),
         panel.grid = element_blank())
+
+
+###
+
+g <- graph_from_data_frame(edges, vertices = vertices)
+
+g <- simplify(g)
+g <- as.undirected(g)
+
+
+bb <- layout_as_backbone(g, keep = 0.4)
+
+
+ggraph(g,layout = "manual", x = bb$xy[,1],
+       y = as.numeric(format(vertices$dob,"%Y")))+
+  geom_edge_link0(edge_width = 0.1, alpha = 0.2)+
+  geom_node_point(aes(fill = dob),shape = 21)+
+  geom_node_text(aes(label = V(g)$lemur_name), 
+                 size =2, check_overlap = TRUE, nudge_y = -0.2) +
+  theme_graph() +
+  theme(legend.position = "none",
+        axis.text.y = element_text(),
+        axis.ticks.y = element_line())
