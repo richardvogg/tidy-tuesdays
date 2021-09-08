@@ -11,7 +11,7 @@ races <- tuesdata$races
 results <- tuesdata$results
 drivers <- tuesdata$drivers
 
-year_ <- 2012
+year_ <- 2004
 
 df_full <- results %>%
   left_join(races, by = "raceId") %>%
