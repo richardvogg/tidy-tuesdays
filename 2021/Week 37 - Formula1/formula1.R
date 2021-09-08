@@ -48,12 +48,13 @@ ggplot(aes(y = reorder(driver_name, n), x = reorder(name, raceId))) +
         axis.text.x = element_text(size = 9, angle = 18),
         axis.title = element_blank())
 
+maxval <- max(top_10$n / 40)
 
 bar <- top_10 %>%
   mutate(n_adapted = ifelse(n == max(n), paste(n, "points"), n)) %>%
   ggplot(aes(x = n, y = reorder(driver_name, n))) +
   geom_col(fill = "grey50") +
-  geom_text(aes(label = n_adapted), x = 15, col = "white", hjust = 0,
+  geom_text(aes(label = n_adapted), x = maxval, col = "white", hjust = 0,
             family = "Jura", size = 5) +
   theme_void()
 
