@@ -17,7 +17,8 @@ create_histogram <- function(title = "Wannabe") {
   word_count <- lyrics %>%
     unnest_tokens(word, line) %>%
     filter(song_name == title) %>%
-    count(word, sort = TRUE)
+    count(word, sort = TRUE) %>%
+    filter(!word %in% c("you", "i", "we", "that"))
   
   rows <- nrow(word_count)
   
