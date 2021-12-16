@@ -13,7 +13,7 @@ lyrics <- tuesdata$lyrics
 
 ## Quiz
 
-create_histogram <- function(title = "Wannabe") {
+create_histogram <- function(title = "Wannabe", fill_col = "grey20") {
   word_count <- lyrics %>%
     unnest_tokens(word, line) %>%
     filter(song_name == title) %>%
@@ -33,7 +33,8 @@ create_histogram <- function(title = "Wannabe") {
   
   
   top <- top_3 %>%
-    ggplot(aes(y = n, x = reorder(word,n))) + geom_chicklet(radius = grid::unit(5, "pt")) +
+    ggplot(aes(y = n, x = reorder(word,n))) + 
+    geom_chicklet(radius = grid::unit(5, "pt"), fill = fill_col) +
     geom_text(aes(label = word, y = 0), hjust = 0, nudge_y = max_occ / 20, col = "white") +
     geom_text(data = subset(top_3, rank==1), aes(label = n, y = n), 
               col = "white", nudge_y = -max_occ / 20) +
@@ -41,8 +42,9 @@ create_histogram <- function(title = "Wannabe") {
     theme_void()
   
   tail <- word_count %>%
-    ggplot(aes(x = n, y = reorder(word,n))) + geom_col(width = 1) +
-    annotate("text", x = max_occ / 3, y = rows/2, label = paste(rows, "other words")) +
+    ggplot(aes(x = n, y = reorder(word,n))) + 
+    geom_col(width = 1, fill = fill_col) +
+    annotate("text", x = max_occ / 2, y = rows/2, label = paste(rows, "other words")) +
     coord_cartesian(ylim = c(1, rows-3.2)) +
     theme_void()
   
@@ -54,9 +56,10 @@ create_histogram <- function(title = "Wannabe") {
 set.seed(83)
 
 titles <- sample(unique(lyrics$song_name), 3)
+#Colours from https://www.colourlovers.com/palette/245454/Spice_Girls
+colors <- c("#D3A3A5", "#765057", "#A1221B")
 
-out <- lapply(titles, 
-       function(x) create_histogram(x))
+out <- purrr::map2(titles, colors, function(x,y) create_histogram(x,y))
 
 
 
@@ -67,17 +70,22 @@ title <- ggdraw() +
     x = 0,
     hjust = 0
   ) +
-  theme(
-    # add margin on the left of the drawing canvas,
-    # so title is aligned with left edge of first plot
-    plot.margin = margin(0, 0, 0, 7)
-  )
+  theme(plot.margin = margin(0, 0, 0, 10))
+
+caption <- ggdraw() + 
+  draw_label(
+    "Data: Jacquie Tran via Spotify and Genius",
+    size = 8,
+    x = 1,
+    hjust = 1
+  ) +
+  theme(plot.margin = margin(0, 10, 0, 0))
 
 plot_row <- plot_grid(out[[1]], out[[2]], out[[3]], nrow = 1)
 
-plot_grid(title, plot_row, ncol = 1, rel_heights = c(0.1, 1))
+plot_grid(title, plot_row,caption, ncol = 1, rel_heights = c(0.1, 1,0.08))
 
-
+ggsave("2021/Week 51 - spice girls/plot.png", device = "png", width = 10, height = 6)
 ### Wannabe
 
 
