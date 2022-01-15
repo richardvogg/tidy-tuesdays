@@ -78,5 +78,5 @@ t + annotate("text", x = -200, y = 300, label = "Loss of bee swarms in the US", 
   theme(plot.caption = element_text(size = 12, family = "Nunito"))
 
 
-ggsave("2022/Week 1 - OwnData/plot.png", width = 15, height = 9)
+ggsave("2022/Week 2 - Bees/plot.png", width = 13, height = 5)
 
