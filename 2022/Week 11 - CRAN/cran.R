@@ -103,12 +103,20 @@ pm <- hours %>%
         plot.margin = margin(10, 30, 10, 30))
 
 
-(overall + seasonal + plot_layout(widths = c(2,2))) / 
-  (weekdays + am + pm + plot_layout(widths = c(2,1,1))) +
+layout <- "
+AABB
+AABB
+CCDE
+CCDE
+"
+
+overall + seasonal + weekdays + am + pm +
+  plot_layout(design = layout) +
   plot_annotation(title = "R Package version releases on CRAN",
                   caption = "Data: Robert Flight") &
   theme(plot.title = element_text(size = 25),
         plot.subtitle = element_text(size = 16),
         text = element_text(family = "Fredoka"))
 
+ggsave("2022/Week 11 - CRAN/plot.png", width = 12, height = 9)
   
