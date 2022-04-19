@@ -58,7 +58,7 @@ ggplot(final_df, aes(x = name, y = value)) +
   expand_limits(x = -0.3) +
   labs(title = "Crossword puzzle words use different letters than novels",
        caption = "Data: Cryptic Crossword Clues",
-       subtitles = "Letters which are used <span style='color:blue'>much more</span> or <span style='color:orange'>much less</span> in crossword puzzles compared to <span style='text-decoration:underline'>Pride or Prejudice</span>.",
+       subtitles = "Letters which are used <span style='color:blue'>much more</span> or <span style='color:orange'>much less</span> in crossword puzzles compared to <span style='text-decoration:underline'>Pride and Prejudice</span>.",
        y = "Frequency", x = "") +
   theme_light() +
   theme(strip.text = element_blank(),
