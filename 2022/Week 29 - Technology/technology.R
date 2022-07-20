@@ -1,7 +1,7 @@
 library(ggplot2)
 library(dplyr)
 library(tidyr)
-library(ggstream)
+#library(ggstream)
 library(MetBrewer)
 library(patchwork)
 library(forcats)
@@ -18,9 +18,9 @@ technology <- technology %>%
 chile_df <- technology %>%
   filter(iso3c == "CHL", category == "Communications")
 
-chile_df %>%
-ggplot(aes(x = year, y = value, group = label, col = label)) +
-  geom_line()
+#chile_df %>%
+#ggplot(aes(x = year, y = value, group = label, col = label)) +
+#  geom_line()
 
 labels <- chile_df %>%
   filter(year > 1950, variable != "telephone") %>%
@@ -28,18 +28,23 @@ labels <- chile_df %>%
   filter(n > 10000000) %>%
   .$label %>% unique()
 
+#labels <- c("cell_subsc", "internetuser", "servers", "telephone_canning_wdi")
+
 compare <- data.frame(year = 1951:2020, label = rep(labels, 70)) %>%
   expand(year, label)
 
 
-for(ctry in c("DEU", "CHL", "USA", "CHN", "CAF", "AFG", "IRN", "ISR")) {
+for(ctry in c("DEU", "CHL", "USA", "THA", "CAF", "AFG", "IRN", "ISR")) {
   assign(ctry, technology %>%
            filter(iso3c == ctry, category == "Communications") %>%
            filter(year > 1950, variable != "telephone", label %in% labels) %>%
            right_join(compare, by = c("year", "label")) %>%
-           mutate(value = ifelse(is.na(value), 0, value)) %>%
+           group_by(year) %>% 
+           mutate(value = value/sum(value, na.rm = TRUE),
+                  value = ifelse(is.na(value), 0, value)) %>%
            ggplot(aes(x = year, y = value, fill = label)) +
-           geom_stream(type = "proportional", bw = 1.5) +
+           geom_area(position = "fill", colour = "black", size = .2) +
+           #geom_stream(type = "proportional", bw = 1.5) +
            #geom_stream_label(aes(label = label), bw = 1.5, type = "proportional") +
            scale_fill_manual(values=met.brewer("Nizami")) +
            labs(subtitle = countrycode::countrycode(ctry, origin = "iso3c", destination = "country.name"),
@@ -51,17 +56,20 @@ for(ctry in c("DEU", "CHL", "USA", "CHN", "CAF", "AFG", "IRN", "ISR")) {
 
 deu <- technology %>%
   filter(iso3c == "DEU", category == "Communications") %>%
-  filter(year > 1950, variable != "telephone", label %in% labels) %>%
-  right_join(compare, by = c("year", "label")) %>%
+  filter(year > 1950, variable %in% labels) %>% 
+  right_join(compare, by = c("year", "variable")) %>%
+  group_by(year) %>% 
+  mutate(value = value/sum(value, na.rm = TRUE),
+         value = ifelse(is.na(value), 0, value)) %>% 
   ggplot(aes(x = year, y = value, fill = label)) +
-  geom_stream(type = "proportional", bw = 1.5) +
-  geom_stream_label(aes(label = label), bw = 1.5, type = "proportional") +
+  geom_area(position = "fill", colour = "black", size = .2) +
+  #geom_stream_label(aes(label = label), bw = 1.5, type = "proportional") +
   scale_fill_manual(values=met.brewer("Nizami")) +
   theme(legend.position = "none")
   
   
 
-DEU + CAF + CHN + 
+DEU + CAF + THA + 
   ISR + USA + AFG + 
   IRN + CHL + guide_area() + 
   plot_layout(guides = 'collect', ncol = 3) +
